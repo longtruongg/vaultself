@@ -1,0 +1,13 @@
+1: vault server -dev   // start with dev mode, for testing
+2: export VAULT_ADDR='http://127.0.0.1:8200' //default
+3: vault auth enable approle // enable approle
+4: vault auth enable -path=application -description="Approle  auth method" approle   // config path
+5: vault write auth/approle/role/web-app1 policies=web-app1-policy  token_ttl=30m token_max_ttl=60m
+secret_id_ttl=120m// write role
+6: vault list auth/approle/role  // get list role
+7: vault read auth/approle/role/web-app1 // read config approle
+8: vault read auth/approle/role/web-app1/role-id //Generator role_id
+9: vault write -f auth/approle/role/web-app1/secret-id   // Generator secret id
+10: vault write -f -format=json \
+    auth/approle/role/web-app1/secret-id \
+    | jq -r '.data.secret_id' > web-app1-secretID.txt  // write to file

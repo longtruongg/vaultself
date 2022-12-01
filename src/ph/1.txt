@@ -1,0 +1,8 @@
+200: Node init, unsealed, active
+429: Node's unsealed and standby
+472: Node's recovery mode,
+473: Node's a performance standby
+501: Node's not init
+503: Node's sealed
+
+echo 'set +o history' >> /etc/bashrc  // disable command history

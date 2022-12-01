@@ -1,0 +1,6 @@
+path "secret/data/apps/web-app1" {
+capabilities = ["read"]
+}
+path "database/creds/mysql01" {
+capabilities = ["read"]
+}
