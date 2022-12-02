@@ -1,0 +1,22 @@
+1 : Get Role ID:
+vault read auth/approle/role/web-app1/role-id
+ -> role_id    8c9f8c03-c94e-7951-8e03-56e6111c2614
+2 : Post Secret ID:
+vault write -f auth/approle/role/web-app1/secret-id
+ ->secret_id             e53acd3a-b626-4d61-df5e-98bf87a6a6ea
+   secret_id_accessor    2f3df764-6c7f-9109-820c-9d288f958702
+   secret_id_num_uses    0
+   secret_id_ttl         0s
+
+3: Authen with Approle: roleID + Secret ID, return token and duration
+vault write auth/approle/login role_id=..... secret_id=.....
+  {
+  token                   hvs.CAESIIQfcvCfiZ1gGBjijfZU9wUuCbrTvAn-O6SRmwgSqDmqGh4KHGh2cy43RzBnZTZpTzY5ZkxWRjdjVVBQSDVLTXM
+  token_accessor          2s0DVUhi9FmR3LrBbv5ANAnw
+  token_duration          30m
+  token_renewable         true
+  token_policies          ["default" "web-app1-policy"]
+  identity_policies       []
+  policies                ["default" "web-app1-policy"]
+  token_meta_role_name    web-app1
+  }
